@@ -1,0 +1,5 @@
+nodeport_dev=30055
+nodeport_main=30055
+nodeport_dev_nnp=30077
+nodeport_main_nnp=30766
+

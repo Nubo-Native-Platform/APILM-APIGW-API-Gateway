@@ -1,0 +1,60 @@
+# Standalone configuration for the API Gateway (data plane).
+# Every value can be overridden with an environment variable (shown per entry).
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: api-gw
+  data:
+    redis:
+      # Used for the API-user token/value cache
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      password: ${SPRING_DATA_REDIS_PASSWORD:}
+  cloud:
+    gateway:
+      server:
+        webflux:
+          # Keep serving traffic if a stored route definition is broken
+          fail-on-route-definition-error: false
+
+# Control-plane API Gateway Service: source of routes, users, and the
+# pull-refresh contract (GET /refresh?time=...)
+nnp:
+  apiecosystem:
+    service:
+      url: ${NNP_APIECOSYSTEM_SERVICE_URL:http://localhost:8082}
+    analytics:
+      service:
+        url: ${NNP_APIECOSYSTEM_ANALYTICS_SERVICE_URL:http://localhost:8083}
+    consumer:
+      anonymous:
+        # Consumer id used for unauthenticated calls
+        id: ${NNP_APIECOSYSTEM_CONSUMER_ANONYMOUS_ID:change-me}
+    # Domain suffix scope (optional)
+    domain: ${NNP_DOMAIN:}
+
+# This gateway's own base URL (used by the route-refresh scheduler)
+gateway:
+  base:
+    url: ${GATEWAY_BASE_URL:http://localhost:8080}
+  cache:
+    ttl: ${GATEWAY_CACHE_TTL:30}   # seconds
+
+# API log pipeline
+api:
+  logging:
+    enable:
+      console: ${API_LOGGING_CONSOLE:true}
+      db: ${API_LOGGING_DB:false}
+      log:
+        optional:
+          attributes: ${API_LOGGING_OPTIONAL_ATTRIBUTES:false}
+      skip:
+        optional:
+          routes: ${API_LOGGING_SKIP_OPTIONAL_ROUTES:true}
+      db:
+        task:
+          delayinseconds: ${API_LOGGING_DB_TASK_DELAY:10}
+          maxcount: ${API_LOGGING_DB_TASK_MAXCOUNT:50}

@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "c6c5b2bb-e8d9-42e5-884e-eef03f0cbb11",
+		"name": "API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7094720"
+	},
+	"item": [
+		{
+			"name": "simStatusQuery",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "ZWdvdWd1aEFwaUtleTplZ291Z3VoU2VjcmV0",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"iccid\":\"89610149194095000150\",\"sourceTransactionId\":\"1234\",\"businessUnitIdentifier\":{\"buId\":3}}\t"
+				},
+				"url": {
+					"raw": "{{_url_prefix_gw}}simStatusQuery",
+					"host": [
+						"{{_url_prefix_gw}}simStatusQuery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invokeApiAnalyticsTpsHeader",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "YW5hbHl0aWNzOnJlcG9ydFNlY3JldA==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{_url_prefix_gw}}/tcount?timeUnit=seconds",
+					"host": [
+						"{{_url_prefix_gw}}"
+					],
+					"path": [
+						"tcount"
+					],
+					"query": [
+						{
+							"key": "timeUnit",
+							"value": "seconds"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queryBalance",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Ymhhc2thcjptdWtoZXJqZWU=",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"dirNum\":\"61444104025\",\"sourceTransactionId\":\"12345\",\"businessUnitIdentifier\":{\"buIdPub\":\"MVNOA\"}}"
+				},
+				"url": {
+					"raw": "{{_url_prefix_gw}}queryBalances",
+					"host": [
+						"{{_url_prefix_gw}}queryBalances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refresh_gateway",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{_url_prefix_gw}}/actuator/gateway/refresh",
+					"host": [
+						"{{_url_prefix_gw}}"
+					],
+					"path": [
+						"actuator",
+						"gateway",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getHelloWorld",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{_url_prefix_gw}}helloWorld",
+					"host": [
+						"{{_url_prefix_gw}}helloWorld"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
