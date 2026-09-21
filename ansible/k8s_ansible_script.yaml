@@ -1,0 +1,25 @@
+- hosts: localhost
+  connection: local
+  become: true
+ 
+  tasks:
+  - name: Create a k8s namespace nnp-api-ecosystem
+    k8s:
+      state: present
+      definition:
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: <NAMESPACE>
+     
+  - name: Create Service & Deployment of NodeJS Backend POD
+    k8s:
+      state: present
+      apply: yes
+      namespace: <NAMESPACE>
+      src: ./k8s_deployment_script.yaml
+      
+  environment:
+          KUBECONFIG: ./config
+
+
